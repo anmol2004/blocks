@@ -159,3 +159,29 @@ addEventOnElements(hoveredElements, "mouseout", function () {
     cursors[i].classList.remove("hovered");
   }
 });
+
+function handleScroll() {
+  const btn = document.getElementById("whatsappBtn");
+
+  // Only run for mobile
+  if (window.innerWidth <= 768) {
+
+    const scrollPosition = window.innerHeight + window.scrollY;
+    const pageHeight = document.body.offsetHeight;
+
+    // If near bottom → hide button
+    if (scrollPosition >= pageHeight - 50) {
+      btn.style.opacity = "0";
+      btn.style.pointerEvents = "none";
+    } else {
+      btn.style.opacity = "1";
+      btn.style.pointerEvents = "auto";
+    }
+  } else {
+    // Always visible on desktop
+    btn.style.opacity = "1";
+    btn.style.pointerEvents = "auto";
+  }
+}
+
+window.addEventListener("scroll", handleScroll);
